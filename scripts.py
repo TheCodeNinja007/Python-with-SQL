@@ -29,5 +29,10 @@ mycursor.execute("SHOW TABLES")
 for tb in mycursor:
     print(tb)
 
-
-
+#Insert data into the tables
+sqlFormula = "INSERT INTO customers (name, age) VALUES (%s, %s)"
+customer1 = ("Sam", 24)
+customer2 = ("Tim", 33)
+customer3 = ("Tania", 50)
+customer4 = ("Dan", 43)
+customer5 = ("Mai", 19)
