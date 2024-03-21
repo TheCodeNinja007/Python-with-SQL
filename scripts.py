@@ -1,3 +1,6 @@
+#SQL Python Connector Documentation can be found here:
+# https://dev.mysql.com/doc/connector-python/en/connector-python-reference.html
+
 #Establish connection with mysql
 import mysql.connector
 from config import DB_PASSWORD
@@ -29,10 +32,30 @@ mycursor.execute("SHOW TABLES")
 for tb in mycursor:
     print(tb)
 
-#Insert data into the tables
-sqlFormula = "INSERT INTO customers (name, age) VALUES (%s, %s)"
-customer1 = ("Sam", 24)
-customer2 = ("Tim", 33)
-customer3 = ("Tania", 50)
-customer4 = ("Dan", 43)
-customer5 = ("Mai", 19)
+# #Insert a customer data into the tables
+# sqlFormula = "INSERT INTO customers (name, age) VALUES (%s, %s)"
+# customer1 = ("Sam", 24)
+# mycursor.execute(sqlFormula, customer1)
+# #Save changes to the DB
+# mydb.commit()
+    
+#Inserting an array of values into the DB
+sqlFormula2 = "INSERT INTO customers (name, age) VALUES (%s, %s)"
+customers = [("Li", 31),
+            ("Ana", 58),
+            ("Daniel", 18),
+            ("Beatrice", 72),
+            ("Omar", 42),
+            ("Isabella", 20),
+            ("Noah", 6),
+            ("Sophia", 35),
+            ("William", 88),
+            ("Chloe", 27),]
+
+mycursor.executemany(sqlFormula2, customers)
+mydb.commit()
+
+#Note: if you want to use the mycursor.execute() command, then you will need to loop through the customers data and implement the sqlFormula. Here is an example:
+# for name, age in customers:
+#     mycursor.execute(sqlFormula2, (name, age))
+# mydb.commit()
