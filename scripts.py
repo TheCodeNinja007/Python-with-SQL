@@ -28,9 +28,9 @@ for db in mycursor:
 # mycursor.execute("CREATE TABLE customers(name VARCHAR(255), age INT(30))")
 
 #Check created table
-mycursor.execute("SHOW TABLES")
-for tb in mycursor:
-    print(tb)
+# mycursor.execute("SHOW TABLES")
+# for tb in mycursor:
+#     print(tb)
 
 # #Insert a customer data into the tables
 # sqlFormula = "INSERT INTO customers (name, age) VALUES (%s, %s)"
@@ -59,3 +59,25 @@ mydb.commit()
 # for name, age in customers:
 #     mycursor.execute(sqlFormula2, (name, age))
 # mydb.commit()
+
+#Selecting & Getting Data
+#Select the required data
+# mycursor.execute("SELECT * FROM customers")
+# #save it to a variable
+# results = mycursor.fetchall()
+# #print it to the screen
+# for row in results:
+#     print(row)
+
+#Select specific data
+# mycursor.execute("SELECT age FROM customers")
+# age_results = mycursor.fetchall()
+# for row in age_results:
+#     print(row)
+
+#Select one entry
+mycursor.execute("SELECT age FROM customers")
+#return first result with fetchone() method
+one_entry = mycursor.fetchone()
+for row in one_entry:
+    print(row)
