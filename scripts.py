@@ -76,8 +76,24 @@ mydb.commit()
 #     print(row)
 
 #Select one entry
-mycursor.execute("SELECT age FROM customers")
-#return first result with fetchone() method
-one_entry = mycursor.fetchone()
-for row in one_entry:
+# mycursor.execute("SELECT age FROM customers")
+# #return first result with fetchone() method
+# one_entry = mycursor.fetchone()
+# for row in one_entry:
+#     print(row)
+
+#Filtering results
+# sql_formula = "SELECT * FROM customers WHERE name='Ana'"
+# mycursor.execute(sql_formula)
+# results = mycursor.fetchall()
+
+# for row in results:
+#     print(row)
+
+#Wildcard charatcers (fetch any thing that matches what is inside, before or after the % signs)
+sql_formula_3 = "SELECT * FROM customers WHERE name LIKE '%W%'"
+
+mycursor.execute(sql_formula_3)
+wildcard_results = mycursor.fetchall()
+for row in wildcard_results:
     print(row)
