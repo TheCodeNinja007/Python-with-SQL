@@ -25,35 +25,35 @@ for db in mycursor:
     print(db)
 
 #Create a table in the database #Remember to add the dtabase name within the connection configuration lines above to point to the database you created!
-# mycursor.execute("CREATE TABLE customers(name VARCHAR(255), age INT(30))")
+mycursor.execute("CREATE TABLE IF NOT EXISTs customers(name VARCHAR(255), age INT(30))")
 
 #Check created table
-# mycursor.execute("SHOW TABLES")
-# for tb in mycursor:
-#     print(tb)
+mycursor.execute("SHOW TABLES")
+for tb in mycursor:
+    print(tb)
 
 # #Insert a customer data into the tables
-# sqlFormula = "INSERT INTO customers (name, age) VALUES (%s, %s)"
+# sqlInsert = "INSERT INTO customers (name, age) VALUES (%s, %s)"
 # customer1 = ("Sam", 24)
-# mycursor.execute(sqlFormula, customer1)
+# mycursor.execute(sqlInsert, customer1)
 # #Save changes to the DB
 # mydb.commit()
     
 #Inserting an array of values into the DB
-sqlFormula2 = "INSERT INTO customers (name, age) VALUES (%s, %s)"
-customers = [("Li", 31),
-            ("Ana", 58),
-            ("Daniel", 18),
-            ("Beatrice", 72),
-            ("Omar", 42),
-            ("Isabella", 20),
-            ("Noah", 6),
-            ("Sophia", 35),
-            ("William", 88),
-            ("Chloe", 27),]
+# sqlInsertMany = "INSERT INTO customers (name, age) VALUES (%s, %s)"
+# customers = [("Li", 31),
+#             ("Ana", 58),
+#             ("Daniel", 18),
+#             ("Beatrice", 72),
+#             ("Omar", 42),
+#             ("Isabella", 20),
+#             ("Noah", 6),
+#             ("Sophia", 35),
+#             ("William", 88),
+#             ("Chloe", 27),]
 
-mycursor.executemany(sqlFormula2, customers)
-mydb.commit()
+# mycursor.executemany(sqlInsertMany, customers)
+# mydb.commit()
 
 #Note: if you want to use the mycursor.execute() command, then you will need to loop through the customers data and implement the sqlFormula. Here is an example:
 # for name, age in customers:
@@ -83,17 +83,57 @@ mydb.commit()
 #     print(row)
 
 #Filtering results
-# sql_formula = "SELECT * FROM customers WHERE name='Ana'"
-# mycursor.execute(sql_formula)
+# sqlFilter = "SELECT * FROM customers WHERE name='Ana'"
+# mycursor.execute(sqlFilter)
 # results = mycursor.fetchall()
 
 # for row in results:
 #     print(row)
 
 #Wildcard charatcers (fetch any thing that matches what is inside, before or after the % signs)
-sql_formula_3 = "SELECT * FROM customers WHERE name LIKE '%W%'"
+# sqlWildCard = "SELECT * FROM customers WHERE name LIKE '%W%'"
 
-mycursor.execute(sql_formula_3)
-wildcard_results = mycursor.fetchall()
-for row in wildcard_results:
-    print(row)
+# mycursor.execute(sqlWildCard)
+# wildcard_results = mycursor.fetchall()
+# for row in wildcard_results:
+#     print(row)
+
+# # Updating Entries and Limiting Queries
+# mycursor = mydb.cursor()
+# sqlUpdate = "UPDATE customers SET age = 31 WHERE name = 'Ana'"
+# mycursor.execute(sqlUpdate)
+# mydb.commit()
+
+# #Limiting the number of results from a query (add the 'OFFSET' statement to start after a specific row)
+# sqlSelect = "SELECT * FROM customers LIMIT 5 OFFSET 2"
+# mycursor.execute(sqlSelect)
+# results = mycursor.fetchall()
+# for row in results:
+#     print(row)
+
+# #Ordering Query Results
+# sqlOrder = "SELECT * FROM customers ORDER BY name"
+# mycursor.execute(sqlOrder)
+# results = mycursor.fetchall()
+# for row in results:
+#     print(row)
+
+# sqlOrderDesc = "SELECT * FROM customers Order BY age DESC"
+# mycursor.execute(sqlOrderDesc)
+# results = mycursor.fetchall()
+# for row in results:
+#     print(row)
+
+# #Deleting Records and Droping Tables
+# sqlDelete = "DELETE FROM customers WHERE name = 'Ana' "
+# mycursor.execute(sqlDelete)
+# mydb.commit()
+
+# results = mycursor.fetchall()
+# for row in results:
+#     print(row)
+
+# #Dropping a table
+# sqlDrop = "DROP TABLE IF EXISTS customers"
+# mycursor.execute(sqlDrop)
+# mydb.commit()
